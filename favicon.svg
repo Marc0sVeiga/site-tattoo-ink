@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Mario Veiga Ink favicon">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#111111"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <path d="M12 48V16h7l9 16 9-16h7v32h-6V26l-10 17h-2L18 26v22h-6Z" fill="#F2E9D9"/>
+  <path d="M42 16h10v8H42z" fill="#D72638"/>
+  <path d="M16 16h10v8H16z" fill="#D72638" opacity="0.9"/>
+</svg>
