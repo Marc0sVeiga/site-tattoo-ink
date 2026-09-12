@@ -33,6 +33,20 @@ var PixUtils = (function () {
       .slice(0, max);
   }
 
+  function normalizePhoneKey(value) {
+    var digits = String(value).replace(/\D/g, "");
+
+    if (digits.indexOf("55") === 0 && digits.length === 13) {
+      return "+" + digits;
+    }
+
+    if (digits.length === 10 || digits.length === 11) {
+      return "+55" + digits;
+    }
+
+    return String(value).trim();
+  }
+
   function buildPixPayload(opts) {
     var merchant = normalizeMerchantText(opts.merchantName, 25);
 
@@ -42,8 +56,14 @@ var PixUtils = (function () {
     var rawKey = String(opts.key || "").trim();
     var normalizedKey = rawKey;
 
-    if (keyType === "CPF" || keyType === "CNPJ" || keyType === "TELEFONE") {
+    if (keyType === "CPF" || keyType === "CNPJ") {
       normalizedKey = rawKey.replace(/\D/g, "");
+    } else if (
+      keyType === "TELEFONE" ||
+      keyType === "CELULAR" ||
+      keyType === "CEL"
+    ) {
+      normalizedKey = normalizePhoneKey(rawKey);
     } else if (keyType === "EMAIL") {
       normalizedKey = rawKey.toLowerCase();
     } else if (
@@ -71,7 +91,7 @@ var PixUtils = (function () {
       emv("62", emv("05", String(opts.txid).slice(0, 25))) +
       emv("63", "0000");
 
-    var crc = crc16(base);
+    var crc = crc16(base.slice(0, -4));
 
     return base.slice(0, -4) + crc;
   }
@@ -96,11 +116,71 @@ var PixUtils = (function () {
       .slice(0, 25);
   }
 
-  return {
+  function validatePixPayload(opts) {
+    var keyType = String(opts.keyType || "").toUpperCase();
+    var key = String(opts.key || "").trim();
+    var amount = Number(opts.amount);
+    var txid = String(opts.txid || "").trim();
+
+    var errors = [];
+
+    if (!key) errors.push("Chave Pix ausente.");
+    if (!Number.isFinite(amount) || amount <= 0) {
+      errors.push("Valor do Pix inválido.");
+    }
+    if (!txid) errors.push("TXID ausente.");
+
+    if (keyType === "CPF" && !/^\d{11}$/.test(key.replace(/\D/g, ""))) {
+      errors.push("CPF inválido.");
+    }
+
+    if (keyType === "TELEFONE" || keyType === "CELULAR" || keyType === "CEL") {
+      var normalizedPhone = normalizePhoneKey(key);
+      if (!/^\+55\d{10,11}$/.test(normalizedPhone)) {
+        errors.push("Telefone inválido.");
+      }
+    }
+
+    if (keyType === "EMAIL" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(key)) {
+      errors.push("E-mail inválido.");
+    }
+
+    if (
+      (keyType === "ALEATORIA" ||
+        keyType === "CHAVE ALEATORIA" ||
+        keyType === "EVP") &&
+      !/^[0-9a-fA-F-]{36}$/.test(key)
+    ) {
+      errors.push("Chave aleatória inválida. Esperado UUID com 36 caracteres.");
+    }
+
+    var payload = buildPixPayload(opts);
+    var ok = errors.length === 0 && /^000201/.test(payload);
+
+    return {
+      ok: ok,
+      errors: errors,
+      payload: payload,
+    };
+  }
+
+  var api = {
     crc16: crc16,
     buildPixPayload: buildPixPayload,
+    validatePixPayload: validatePixPayload,
     calcSignal: calcSignal,
     formatBRL: formatBRL,
     buildTxid: buildTxid,
+    version: "1.1.0",
   };
+
+  if (typeof globalThis !== "undefined") {
+    globalThis.PixUtils = api;
+  }
+
+  if (typeof window !== "undefined") {
+    window.PixUtils = api;
+  }
+
+  return api;
 })();

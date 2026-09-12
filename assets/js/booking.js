@@ -1,5 +1,3 @@
-
-
 var bookingState = {
   step: 0,
   service: null,
@@ -31,7 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
   renderStepService();
   goToStep(0, true);
 });
-
 
 function goToStep(step, skipScroll) {
   bookingState.step = step;
@@ -73,7 +70,6 @@ function renderStepsBar() {
     );
   }).join("");
 }
-
 
 function renderStepService() {
   var grid = document.querySelector("[data-service-select-grid]");
@@ -130,7 +126,6 @@ function updateServiceNextButton() {
   var nextBtn = document.querySelector("[data-service-next]");
   if (nextBtn) nextBtn.disabled = !bookingState.service;
 }
-
 
 function renderStepDetails() {
   var nameInput = document.getElementById("field-name");
@@ -235,7 +230,6 @@ function handleDetailsSubmit(ev) {
   goToStep(2);
 }
 
-
 function renderStepPayment() {
   var s = bookingState.service;
   var signal = PixUtils.calcSignal(s.price);
@@ -279,7 +273,6 @@ function renderStepPayment() {
       "QR Code: biblioteca QRCode não carregou. Verifique a conexão ou o CDN.",
     );
   } else {
-    
     var ctx = canvas.getContext("2d");
 
     if (ctx) {
@@ -294,10 +287,9 @@ function renderStepPayment() {
         height: 176,
         margin: 2,
 
-        
         color: {
-          dark: "#FFFFFF",
-          light: "#0A0A0A",
+          dark: "#0A0A0A",
+          light: "#FFFFFF",
         },
 
         errorCorrectionLevel: "M",
@@ -350,9 +342,7 @@ function copyPixPayload(payload, btn) {
     navigator.clipboard
       .writeText(payload)
       .then(markCopied)
-      .catch(function () {
-        
-      });
+      .catch(function () {});
   }
 }
 
@@ -398,13 +388,10 @@ function sendWhatsAppConfirmation() {
         }),
       ),
     );
-  } catch (e) {
-    
-  }
+  } catch (e) {}
 
   goToStep(3);
 }
-
 
 function renderStepConfirmation() {
   var s = bookingState.service;
@@ -449,7 +436,6 @@ function restartBooking() {
   renderStepService();
   goToStep(0);
 }
-
 
 function iconCheck() {
   return '<svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';

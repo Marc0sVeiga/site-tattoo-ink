@@ -24,9 +24,9 @@ var siteConfig = {
 
   whatsappNumber: "5567982022583",
   pix: {
-    keyType: "ALEATORIA",
+    keyType: "CELULAR",
 
-    key: "8692acd4-7f24-4b21-86f3-50a17208b65f",
+    key: "+5567982022583",
 
     merchantName: "MARIO VEIGA",
 
