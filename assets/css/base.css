@@ -1,0 +1,81 @@
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+.section-bordered {
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  background: hsl(0 0% 7% / 0.3);
+}
+
+.section-top-border {
+  border-top: 1px solid var(--border-soft);
+}
+
+/* ---------- Grain overlay ---------- */
+.grain {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -100%;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Reveal-on-scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Typography ---------- */
+.eyebrow {
+  margin-bottom: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  color: var(--muted-foreground);
+}
+
+.display {
+  font-family: "Anton", ui-sans-serif, system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px hsl(0 0% 92% / 0.9);
+}
+
+.muted {
+  color: var(--muted-foreground);
+}
+
+/* Todo comportamento responsivo (media queries) deste arquivo
+   foi movido para assets/css/responsive.css */

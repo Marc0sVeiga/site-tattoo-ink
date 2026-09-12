@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <link href="./favicon.ico" rel="icon shortcut" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/variables.css"/>
+    <link rel="stylesheet" href="./assets/css/resset.css"/>
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/components.css">
+    <link rel="stylesheet" href="./assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <title>Agendar horário | Mario Veiga Ink-Tattoo</title>
+    <meta
+      name="description"
+      content="Agende seu horário no estúdio Mario Veiga Ink-Tattoo em Bela Vista, MS. Sinal de 50% via PIX."
+    />
+  </head>
+  <body class="grain" data-page="booking">
+    <!-- ===== Navbar (igual à home) ===== -->
+    <header class="navbar">
+      <div class="container navbar-row">
+        <a href="index.html" class="brand">
+          <span class="brand-mark">MV</span>
+          <span class="brand-name"
+            >MARIO VEIGA<span class="muted">/INK</span></span
+          >
+        </a>
+
+        <nav class="nav-links">
+          <a data-scroll-to="sobre" href="index.html#sobre">Sobre</a>
+          <a data-scroll-to="servicos" href="index.html#servicos">Serviços</a>
+          <a data-scroll-to="como-funciona" href="index.html#como-funciona"
+            >Como funciona</a
+          >
+          <a data-scroll-to="contato" href="index.html#contato">Contato</a>
+        </nav>
+
+        <div class="navbar-cta">
+          <a class="btn btn-primary btn-sm" href="agendar.html">
+            <svg class="icon" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <path d="m9 16 2 2 4-4" />
+            </svg>
+            Agendar
+          </a>
+        </div>
+
+        <button
+          type="button"
+          class="nav-toggle"
+          data-nav-toggle
+          aria-label="Abrir menu"
+          aria-expanded="false"
+        >
+          <svg class="icon" viewBox="0 0 24 24">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-menu" data-mobile-menu>
+        <div class="mobile-menu-links">
+          <a data-scroll-to="sobre" href="index.html#sobre">Sobre</a>
+          <a data-scroll-to="servicos" href="index.html#servicos">Serviços</a>
+          <a data-scroll-to="como-funciona" href="index.html#como-funciona"
+            >Como funciona</a
+          >
+          <a data-scroll-to="contato" href="index.html#contato">Contato</a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container booking-main" style="max-width: 48rem">
+      <div class="booking-header">
+        <p class="eyebrow">AGENDAMENTO</p>
+        <h1 class="display">Reserve seu horário</h1>
+        <p>
+          O sinal de 50% do orçamento, pago via PIX, confirma a sua reserva. O
+          restante é combinado no dia.
+        </p>
+      </div>
+
+      <ol class="steps-bar" data-steps-bar></ol>
+
+      <!-- Passo 1: Serviço -->
+      <section class="booking-step" data-step="0">
+        <div class="service-select-grid" data-service-select-grid></div>
+        <button
+          type="button"
+          class="btn btn-primary btn-lg btn-full"
+          data-service-next
+          onclick="goToStep(1)"
+        >
+          Continuar
+        </button>
+      </section>
+
+      <!-- Passo 2: Dados -->
+      <section class="booking-step" data-step="1">
+        <form onsubmit="handleDetailsSubmit(event)">
+          <div class="form-grid">
+            <div class="field">
+              <label for="field-name">Nome</label>
+              <input id="field-name" type="text" placeholder="Seu nome" />
+              <p class="error" data-error-for="name"></p>
+            </div>
+            <div class="field">
+              <label for="field-phone">WhatsApp</label>
+              <input
+                id="field-phone"
+                type="tel"
+                inputmode="tel"
+                placeholder="67982000000"
+                maxlength="11"
+              />
+              <p class="error" data-error-for="phone"></p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="field-date">Data</label>
+              <input id="field-date" type="date" />
+              <p class="error" data-error-for="date"></p>
+            </div>
+            <div class="field">
+              <label for="field-time">Horário</label>
+              <select id="field-time"></select>
+              <p class="error" data-error-for="time"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="field-message">Sua ideia (opcional)</label>
+            <textarea
+              id="field-message"
+              rows="3"
+              placeholder="Descreva brevemente a tattoo que você quer…"
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline" onclick="goToStep(0)">
+              <svg class="icon" viewBox="0 0 24 24">
+                <line x1="20" y1="12" x2="4" y2="12" />
+                <polyline points="11 19 4 12 11 5" />
+              </svg>
+              Voltar
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg">
+              Continuar para o pagamento
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Passo 3: Pagamento -->
+      <section class="booking-step" data-step="2">
+        <div class="payment-grid">
+          <div class="payment-summary">
+            <p class="service-name display" data-payment-service-name></p>
+            <p class="datetime" data-payment-datetime></p>
+            <div class="summary-row muted-label">
+              <span>Orçamento</span>
+              <span data-payment-total></span>
+            </div>
+            <div
+              class="summary-row muted-label"
+              style="border-top: none; padding-top: 0"
+            >
+              <span>Saldo no dia</span>
+              <span data-payment-balance></span>
+            </div>
+            <div class="summary-row total">
+              <span>SINAL (50%)</span>
+              <span data-payment-signal></span>
+            </div>
+          </div>
+
+          <div class="payment-qr">
+            <canvas
+              data-pix-qrcode
+              width="256"
+              height="256"
+              aria-label="QR Code PIX"
+            ></canvas>
+
+            <p>Aponte a câmera do app do seu banco para pagar</p>
+          </div>
+        </div>
+
+        <div class="pix-copy-box">
+          <code data-pix-payload></code>
+          <button type="button" class="btn btn-outline btn-sm" data-copy-pix>
+            <span data-copy-icon
+              ><svg class="icon" viewBox="0 0 24 24">
+                <rect x="9" y="9" width="12" height="12" rx="1" />
+                <path
+                  d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"
+                /></svg
+            ></span>
+            <span data-copy-label>Copiar</span>
+          </button>
+        </div>
+
+        <label class="confirm-check" for="confirm-paid">
+          <input type="checkbox" id="confirm-paid" />
+          <span
+            >Declaro que paguei o sinal de
+            <strong data-signal-amount></strong> via PIX e vou enviar o
+            comprovante pelo WhatsApp.</span
+          >
+        </label>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" onclick="goToStep(1)">
+            <svg class="icon" viewBox="0 0 24 24">
+              <line x1="20" y1="12" x2="4" y2="12" />
+              <polyline points="11 19 4 12 11 5" />
+            </svg>
+            Voltar
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary btn-lg"
+            data-send-whatsapp
+            disabled
+            onclick="sendWhatsAppConfirmation()"
+          >
+            <svg class="icon" viewBox="0 0 24 24">
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+              />
+            </svg>
+            Já paguei — enviar comprovante
+          </button>
+        </div>
+
+        <p class="payment-note">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5l-8-3Z" />
+            <polyline points="9 12 11 14 15 10" />
+          </svg>
+          Seu agendamento só é confirmado após o estúdio conferir o comprovante
+          no WhatsApp.
+        </p>
+      </section>
+
+      <!-- Passo 4: Confirmação -->
+      <section class="booking-step" data-step="3">
+        <div class="confirmation-box">
+          <svg class="icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" />
+            <path d="m9 12 2 2 4-4" />
+          </svg>
+          <h2 class="display">Pedido enviado!</h2>
+          <p>
+            Seu agendamento foi encaminhado pelo WhatsApp com o comprovante.
+            Assim que o estúdio confirmar o recebimento do sinal, sua reserva
+            estará garantida.
+          </p>
+
+          <div class="confirmation-rows" data-confirmation-rows></div>
+
+          <div class="confirmation-actions">
+            <a class="btn btn-outline" href="index.html">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="m3 9 9-7 9 7" />
+                <path d="M9 22V12h6v10" />
+              </svg>
+              Voltar ao início
+            </a>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="restartBooking()"
+            >
+              <svg class="icon" viewBox="0 0 24 24">
+                <path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+              </svg>
+              Novo agendamento
+            </button>
+          </div>
+
+          <p class="confirmation-footnote">
+            <svg class="icon" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <path d="m9 16 2 2 4-4" />
+            </svg>
+            Siga as instruções do WhatsApp para enviar o comprovante.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== Rodapé (igual à home) ===== -->
+    <footer class="section-top-border">
+      <div class="container footer-top">
+        <div>
+          <p class="footer-brand">MARIO VEIGA<span class="muted">/INK</span></p>
+          <p class="footer-tagline">
+            <span data-tagline></span>. Estúdio de tatuagem em
+            <span data-city></span>.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">ENDEREÇO</p>
+          <p>
+            <svg class="icon" viewBox="0 0 24 24">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            <span data-address></span>
+          </p>
+          <p>
+            <svg class="icon" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="9" />
+              <polyline points="12 7 12 12 15.5 14" />
+            </svg>
+            Ter–Sáb · 9h às 18h
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <p class="footer-col-title">CONTATO</p>
+          <a data-whatsapp-link href="#" target="_blank" rel="noreferrer">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path
+                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+              />
+            </svg>
+            WhatsApp
+          </a>
+          <a data-instagram-link href="#" target="_blank" rel="noreferrer">
+            <svg class="icon" viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" />
+            </svg>
+            Instagram
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container">
+          <p>© <span data-year></span> <span data-studio-name></span></p>
+          <p>Sinal de 50% via PIX reserva o seu horário · Bela Vista – MS</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./assets/js/qrcode.min.js"></script>
+    <script src="assets/js/config.js"></script>
+    <script src="assets/js/pix.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/booking.js"></script>
+  </body>
+</html>

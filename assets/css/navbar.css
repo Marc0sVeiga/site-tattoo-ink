@@ -1,0 +1,100 @@
+
+Navbar · CSS
+/* ============================================================
+   Navbar
+   ============================================================ */
+.navbar {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--border-soft);
+  background: hsl(0 0% 4% / 0.8);
+  backdrop-filter: blur(10px);
+}
+ 
+.navbar-row {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ 
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+ 
+.brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid hsl(0 0% 100% / 0.3);
+  font-family: "Anton", sans-serif;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+ 
+.brand-name {
+  font-family: "Anton", sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+ 
+/* Mobile-first: menu de desktop e CTA ficam ocultos por padrão,
+   o toggle do menu mobile fica visível. A troca para desktop
+   está em responsive.css (≥768px). */
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+ 
+.nav-links button {
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+  transition: color 0.2s;
+}
+ 
+.nav-links button:hover {
+  color: var(--foreground);
+}
+ 
+.navbar-cta {
+  display: none;
+}
+ 
+.nav-toggle {
+  display: inline-flex;
+}
+ 
+.mobile-menu {
+  display: none;
+  border-top: 1px solid var(--border-soft);
+  background: hsl(0 0% 4% / 0.95);
+  padding: 1rem 1.5rem 1.25rem;
+}
+ 
+.mobile-menu.is-open {
+  display: block;
+}
+ 
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+ 
+.mobile-menu-links button {
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--muted-foreground);
+}
+ 
+.mobile-menu .btn {
+  margin-top: 0.25rem;
+}
