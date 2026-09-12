@@ -1,14 +1,10 @@
-
-
 var PixUtils = (function () {
-  
   function emv(id, value) {
     value = String(value);
     var len = String(value.length).padStart(2, "0");
     return id + len + value;
   }
 
-  
   function crc16(payload) {
     var crc = 0xffff;
 
@@ -27,7 +23,6 @@ var PixUtils = (function () {
     return crc.toString(16).toUpperCase().padStart(4, "0");
   }
 
-  
   function normalizeMerchantText(value, max) {
     return String(value)
       .normalize("NFD")
@@ -38,20 +33,32 @@ var PixUtils = (function () {
       .slice(0, max);
   }
 
-  
   function buildPixPayload(opts) {
     var merchant = normalizeMerchantText(opts.merchantName, 25);
 
     var city = normalizeMerchantText(opts.merchantCity, 15);
 
-    var cleanKey = String(opts.key).replace(/\D/g, "");
+    var keyType = String(opts.keyType || "").toUpperCase();
+    var rawKey = String(opts.key || "").trim();
+    var normalizedKey = rawKey;
 
-    
-    var merchantAccount = emv("00", "BR.GOV.BCB.PIX") + emv("01", cleanKey);
+    if (keyType === "CPF" || keyType === "CNPJ" || keyType === "TELEFONE") {
+      normalizedKey = rawKey.replace(/\D/g, "");
+    } else if (keyType === "EMAIL") {
+      normalizedKey = rawKey.toLowerCase();
+    } else if (
+      keyType === "ALEATORIA" ||
+      keyType === "CHAVE ALEATORIA" ||
+      keyType === "EVP"
+    ) {
+      normalizedKey = rawKey;
+    }
+
+    var merchantAccount =
+      emv("00", "BR.GOV.BCB.PIX") + emv("01", normalizedKey);
 
     merchantAccount = emv("26", merchantAccount);
 
-    
     var base =
       emv("00", "01") +
       merchantAccount +
@@ -64,18 +71,15 @@ var PixUtils = (function () {
       emv("62", emv("05", String(opts.txid).slice(0, 25))) +
       emv("63", "0000");
 
-    
     var crc = crc16(base);
 
     return base.slice(0, -4) + crc;
   }
 
-  
   function calcSignal(total) {
     return Math.round(Number(total) * 50) / 100;
   }
 
-  
   function formatBRL(value) {
     return new Intl.NumberFormat("pt-BR", {
       style: "currency",
@@ -83,7 +87,6 @@ var PixUtils = (function () {
     }).format(value);
   }
 
-  
   function buildTxid(prefix) {
     var ts = Date.now().toString(36).toUpperCase();
     var rand = Math.random().toString(36).slice(2, 8).toUpperCase();

@@ -1,5 +1,3 @@
-
-
 var siteConfig = {
   studioName: "Mario Veiga Ink-Tattoo",
   tagline: "Tatuagem artística com traço próprio",
@@ -21,21 +19,20 @@ var siteConfig = {
   ],
 
   instagram: "https://instagram.com/marioveiga_inktattoo",
-  
+
   aboutImage: "",
-  
+
   whatsappNumber: "5567982022583",
   pix: {
-    
-    keyType: "CPF",
-    
-    key: "04570802133",
-    
+    keyType: "ALEATORIA",
+
+    key: "8692acd4-7f24-4b21-86f3-50a17208b65f",
+
     merchantName: "MARIO VEIGA",
-    
+
     merchantCity: "BELA VISTA",
   },
-  
+
   services: [
     {
       id: "pequena",
@@ -73,9 +70,9 @@ var siteConfig = {
       durationMin: 45,
     },
   ],
-  
+
   openDays: [1, 2, 3, 4, 5, 6],
-  
+
   businessHours: [
     "09:00",
     "10:00",
