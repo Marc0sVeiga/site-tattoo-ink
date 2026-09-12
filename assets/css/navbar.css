@@ -1,8 +1,6 @@
 
 Navbar · CSS
-/* ============================================================
-   Navbar
-   ============================================================ */
+
 .navbar {
   position: fixed;
   inset-inline: 0;
@@ -45,9 +43,7 @@ Navbar · CSS
   text-transform: uppercase;
 }
  
-/* Mobile-first: menu de desktop e CTA ficam ocultos por padrão,
-   o toggle do menu mobile fica visível. A troca para desktop
-   está em responsive.css (≥768px). */
+
 .nav-links {
   display: none;
   align-items: center;

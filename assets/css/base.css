@@ -1,4 +1,4 @@
-/* ---------- Layout ---------- */
+
 .container {
   width: 100%;
   max-width: 1280px;
@@ -22,7 +22,7 @@
   border-top: 1px solid var(--border-soft);
 }
 
-/* ---------- Grain overlay ---------- */
+
 .grain {
   position: relative;
   min-height: 100vh;
@@ -39,7 +39,7 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ---------- Reveal-on-scroll ---------- */
+
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -53,7 +53,7 @@
   transform: translateY(0);
 }
 
-/* ---------- Typography ---------- */
+
 .eyebrow {
   margin-bottom: 1.5rem;
   font-size: 0.75rem;
@@ -77,5 +77,4 @@
   color: var(--muted-foreground);
 }
 
-/* Todo comportamento responsivo (media queries) deste arquivo
-   foi movido para assets/css/responsive.css */
+

@@ -1,9 +1,4 @@
-/**
- * DADOS DO ESTÚDIO — edite aqui todos os dados de negócio.
- * Nome, chave PIX, WhatsApp e os preços dos serviços.
- *
- * Este arquivo precisa ser carregado ANTES de pix.js, main.js e booking.js.
- */
+
 
 var siteConfig = {
   studioName: "Mario Veiga Ink-Tattoo",
@@ -26,21 +21,21 @@ var siteConfig = {
   ],
 
   instagram: "https://instagram.com/marioveiga_inktattoo",
-  /** URL da foto de um trabalho (coloque aqui a imagem do seu portfólio) */
+  
   aboutImage: "",
-  /** WhatsApp com DDI + DDD + número, somente dígitos */
+  
   whatsappNumber: "5567982022583",
   pix: {
-    /** Chave PIX: "CPF" | "PHONE" | "EMAIL" | "RANDOM" */
+    
     keyType: "CPF",
-    /** Valor da chave PIX (CPF só com dígitos) */
+    
     key: "04570802133",
-    /** Nome que aparece no pagamento (máx. 25 caracteres) */
+    
     merchantName: "MARIO VEIGA",
-    /** Cidade que aparece no pagamento (máx. 15 caracteres) */
+    
     merchantCity: "BELA VISTA",
   },
-  /** Preços de exemplo — ajuste conforme seu orçamento */
+  
   services: [
     {
       id: "pequena",
@@ -78,9 +73,9 @@ var siteConfig = {
       durationMin: 45,
     },
   ],
-  /** Dias abertos: 0=domingo … 6=sábado */
+  
   openDays: [1, 2, 3, 4, 5, 6],
-  /** Horários disponíveis para agendamento */
+  
   businessHours: [
     "09:00",
     "10:00",

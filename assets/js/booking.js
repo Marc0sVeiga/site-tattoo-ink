@@ -1,9 +1,4 @@
-/**
- * Lógica da página de agendamento (agendar.html).
- * Porta direta do fluxo de 4 passos do Booking.tsx original,
- * sem framework: alterna a visibilidade dos passos e guarda o
- * estado em uma variável comum (bookingState).
- */
+
 
 var bookingState = {
   step: 0,
@@ -37,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
   goToStep(0, true);
 });
 
-/* ---------- Navegação entre passos ---------- */
+
 function goToStep(step, skipScroll) {
   bookingState.step = step;
 
@@ -79,9 +74,7 @@ function renderStepsBar() {
   }).join("");
 }
 
-/* ============================================================
-   Passo 1 — Serviço
-   ============================================================ */
+
 function renderStepService() {
   var grid = document.querySelector("[data-service-select-grid]");
   if (!grid) return;
@@ -138,9 +131,7 @@ function updateServiceNextButton() {
   if (nextBtn) nextBtn.disabled = !bookingState.service;
 }
 
-/* ============================================================
-   Passo 2 — Dados
-   ============================================================ */
+
 function renderStepDetails() {
   var nameInput = document.getElementById("field-name");
   var phoneInput = document.getElementById("field-phone");
@@ -244,9 +235,7 @@ function handleDetailsSubmit(ev) {
   goToStep(2);
 }
 
-/* ============================================================
-   Passo 3 — Pagamento (Pix)
-   ============================================================ */
+
 function renderStepPayment() {
   var s = bookingState.service;
   var signal = PixUtils.calcSignal(s.price);
@@ -290,7 +279,7 @@ function renderStepPayment() {
       "QR Code: biblioteca QRCode não carregou. Verifique a conexão ou o CDN.",
     );
   } else {
-    // Limpa o canvas antes de gerar novamente
+    
     var ctx = canvas.getContext("2d");
 
     if (ctx) {
@@ -305,7 +294,7 @@ function renderStepPayment() {
         height: 176,
         margin: 2,
 
-        // QR branco
+        
         color: {
           dark: "#FFFFFF",
           light: "#0A0A0A",
@@ -362,7 +351,7 @@ function copyPixPayload(payload, btn) {
       .writeText(payload)
       .then(markCopied)
       .catch(function () {
-        /* Clipboard indisponível — o texto permanece visível para cópia manual */
+        
       });
   }
 }
@@ -410,15 +399,13 @@ function sendWhatsAppConfirmation() {
       ),
     );
   } catch (e) {
-    // armazenamento indisponível — segue o fluxo normalmente
+    
   }
 
   goToStep(3);
 }
 
-/* ============================================================
-   Passo 4 — Confirmação
-   ============================================================ */
+
 function renderStepConfirmation() {
   var s = bookingState.service;
   var dateLabel = new Date(bookingState.date + "T00:00:00").toLocaleDateString(
@@ -463,7 +450,7 @@ function restartBooking() {
   goToStep(0);
 }
 
-/* ---------- Ícones inline ---------- */
+
 function iconCheck() {
   return '<svg class="icon" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>';
 }

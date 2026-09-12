@@ -1,51 +1,24 @@
-/* ============================================================
-   RESPONSIVE.CSS
-   Todas as media queries do projeto, num só lugar.
 
-   Regra de ouro: NUNCA adicione @media dentro dos outros
-   arquivos (base.css, navbar.css, style.css...) — toda regra
-   responsiva nasce e mora aqui.
 
-   Carregamento: este arquivo deve ser o ÚLTIMO <link> do HTML,
-   depois de todos os outros CSS, para que as sobrescritas
-   funcionem corretamente na cascata.
 
-   Escala de breakpoints usada no projeto:
-     480px  → telas de celular um pouco maiores
-     640px  → celular grande / phablet
-     768px  → tablet
-     1024px → notebook / desktop pequeno
-     1280px → desktop grande
-   ============================================================ */
-
-/* ============================================================
-   ≥ 480px
-   ============================================================ */
 @media (min-width: 480px) {
-  /* booking.html — steps-bar: 4 colunas a partir daqui.
-     Abaixo de 480px fica em 2 colunas (definido em style.css)
-     porque 4 colunas espremia demais em telas de 320-360px. */
+  
   .steps-bar {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
-/* ============================================================
-   ≤ 480px (regra invertida: esconde recursos em telas muito estreitas)
-   ============================================================ */
+
 @media (max-width: 480px) {
-  /* index.html — hero-actions: botões ocupam a largura toda
-     em telas muito estreitas para facilitar o toque. */
+  
   .hero-actions .btn {
     width: 100%;
   }
 }
 
-/* ============================================================
-   ≥ 640px
-   ============================================================ */
+
 @media (min-width: 640px) {
-  /* index.html — contato: botões lado a lado em vez de empilhados */
+  
   .contact-actions {
     flex-direction: row;
   }
@@ -53,12 +26,12 @@
     width: auto;
   }
 
-  /* index.html — bloco de infos de contato em 3 colunas */
+  
   .contact-info {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /* agendar.html — mostra o texto completo do step, não só o número */
+  
   .steps-bar .step-full {
     display: inline;
   }
@@ -66,8 +39,7 @@
     display: none;
   }
 
-  /* agendar.html — cards de serviço, campos do formulário e
-     resumo do pagamento em 2 colunas a partir daqui */
+  
   .service-select-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -78,27 +50,22 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  /* base.css — mais folga lateral a partir daqui (não mexe
-     no .section, então nunca conflita com o padding vertical) */
+  
   .container {
     padding-left: 2rem;
     padding-right: 2rem;
   }
 }
 
-/* ============================================================
-   ≥ 768px
-   ============================================================ */
+
 @media (min-width: 768px) {
-  /* base.css — respiro vertical maior nas seções em telas médias+
-     (só top/bottom — o horizontal é responsabilidade do .container,
-     ajustado logo acima, pra nunca mais um sobrescrever o outro) */
+  
   .section {
     padding-top: 8rem;
     padding-bottom: 8rem;
   }
 
-  /* navbar.css — troca menu mobile pelo menu de desktop */
+  
   .nav-links,
   .navbar-cta {
     display: flex;
@@ -107,22 +74,22 @@
     display: none;
   }
 
-  /* index.html — hero: grade de fundo mais espaçada em telas maiores */
+  
   .hero-grid {
     background-size: 64px 64px;
   }
 
-  /* index.html — cards de serviços em 2 colunas */
+  
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* index.html — cards "como funciona" em 3 colunas */
+  
   .how-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /* index.html — rodapé em 3 colunas */
+  
   .footer-top {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -130,24 +97,20 @@
     flex-direction: row;
   }
 
-  /* agendar.html — mais respiro vertical no topo */
+  
   .booking-main {
     padding-top: 8rem;
     padding-bottom: 8rem;
   }
 
-  /* index.html — footer também ganha mais respiro vertical
-     (mesma correção: nunca usar "padding: Xrem 0" numa tag que
-     também é .container, ou o horizontal some) */
+  
   .footer-top {
     padding-top: 5rem;
     padding-bottom: 5rem;
   }
 }
 
-/* ============================================================
-   ≥ 1024px  (layout "desktop" do Hero)
-   ============================================================ */
+
 @media (min-width: 1024px) {
   .hero-glow-a {
     top: -8rem;
@@ -178,12 +141,7 @@
     width: 3rem;
   }
 
-  /* Foto e título lado a lado (a estrutura antiga usava
-     position:absolute + padding-left fixo no título pra
-     "abrir espaço" pra foto — isso estourava em telas de
-     1024-1279px e nunca respeitava o tamanho real da foto.
-     Com .hero-title-group em flex-row, o espaçamento é
-     sempre o gap real entre os dois, em qualquer largura.) */
+  
   .hero-title-group {
     flex-direction: row;
     align-items: center;
@@ -218,42 +176,33 @@
     justify-content: flex-start;
   }
 
-  /* index.html — seção "Sobre" em 2 colunas (texto + foto) */
+  
   .about-grid {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
   }
 
-  /* base.css — mais um passo de folga lateral em telas grandes */
+  
   .container {
     padding-left: 3rem;
     padding-right: 3rem;
   }
 }
 
-/* ============================================================
-   ≥ 1280px
-   ============================================================ */
+
 @media (min-width: 1280px) {
-  /* index.html — copy do hero um pouco maior em telas grandes */
+  
   .hero-copy {
     font-size: 1.125rem;
   }
 
-  /* index.html — cards de serviços em 3 colunas */
+  
   .services-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* ============================================================
-   prefers-reduced-motion
-   (Consolidado: antes existia em 3 lugares diferentes —
-   base.css/.reveal, style.css/.my-selfie, style.css/.marquee-strip.
-   Fica por último de propósito, para sempre vencer qualquer
-   outra regra de animação/transform acima, independente do
-   breakpoint ativo.)
-   ============================================================ */
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

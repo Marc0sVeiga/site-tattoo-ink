@@ -1,12 +1,10 @@
-/* ============================================================
-   HERO SECTION
-   ============================================================ */
+
 .hero {
   position: relative;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  min-height: 100dvh; /* Altura perfeita em navegadores mobile */
+  min-height: 100dvh; 
   overflow: hidden;
   background-color: hsl(0 0% 4%);
 }
@@ -17,7 +15,7 @@
   background-image:
     linear-gradient(to right, hsl(0 0% 15% / 0.35) 1px, transparent 1px),
     linear-gradient(to bottom, hsl(0 0% 15% / 0.35) 1px, transparent 1px);
-  background-size: 40px 40px; /* Grade menor para melhor escala em telas pequenas */
+  background-size: 40px 40px; 
 }
 
 .hero-glow-a,
@@ -50,7 +48,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-top: 6rem; /* Dá espaço para a Navbar fixa */
+  padding-top: 6rem; 
   padding-bottom: 4rem;
   z-index: 2;
 }
@@ -59,7 +57,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centraliza tudo por padrão no Mobile */
+  align-items: center; 
   text-align: center;
   width: 100%;
 }
@@ -68,7 +66,7 @@
   margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
-  flex-direction: column; /* Empilha o traço e o texto no mobile */
+  flex-direction: column; 
   gap: 0.5rem;
   font-size: 0.7rem;
   font-weight: 600;
@@ -84,10 +82,7 @@
   background: hsl(0 0% 63% / 0.4);
 }
 
-/* Grupo foto + título: no mobile fica empilhado (foto em cima
-   do título), no desktop fica lado a lado — ver responsive.css
-   (≥1024px). Sem position:absolute, sem padding manual: o
-   espaçamento entre foto e texto é só o "gap" do flex. */
+
 .hero-title-group {
   display: flex;
   flex-direction: column;
@@ -104,7 +99,7 @@
 }
 
 .hero-title {
-  /* Escala perfeita de 2.2rem até o limite que o container permitir */
+  
   font-size: clamp(2.2rem, 12vw, 10.5rem);
   line-height: 0.85;
   text-align: center;
@@ -136,11 +131,7 @@
   width: 100%;
 }
 
-/* FOTO DE PERFIL
-   Item flex normal dentro de .hero-title-group — nada de
-   position:absolute. O tamanho muda por breakpoint (ver
-   responsive.css), mas width sempre é igual a height, então
-   é sempre um círculo perfeito (nunca uma "oval"). */
+
 .about-placeholder-Selfie {
   position: relative;
   flex-shrink: 0;
@@ -180,12 +171,7 @@
   animation: selfie-enter 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Antes essa animação sempre terminava em translateX(0),
-   o que anulava qualquer posição horizontal definida em CSS
-   estático — por isso a foto nunca ficava onde devia no
-   desktop, não importava o que a gente mudasse. Agora ela só
-   faz fade + leve zoom, então o estado final da animação bate
-   exatamente com o estado de repouso definido acima. */
+
 @keyframes selfie-enter {
   0% {
     opacity: 0;
@@ -210,14 +196,7 @@
   }
 }
 
-/* ============================================================
-   SOBRE (ABOUT)
-   Obs: essa seção não tinha CSS em nenhum arquivo do projeto —
-   só existia no HTML. Regras adicionadas do zero, mobile-first,
-   seguindo o mesmo padrão visual das outras seções (grid,
-   bordas finas, mesma paleta). O breakpoint de 2 colunas está
-   em responsive.css.
-   ============================================================ */
+
 .about-grid {
   display: grid;
   gap: 2.5rem;
@@ -255,9 +234,7 @@
   display: block;
 }
 
-/* ============================================================
-   SERVIÇOS (SERVICES)
-   ============================================================ */
+
 .services-head h2 {
   font-size: clamp(2.2rem, 6vw, 3.75rem);
   line-height: 1.1;
@@ -355,9 +332,7 @@
   font-size: 1rem;
 }
 
-/* ============================================================
-   COMO FUNCIONA (HOW IT WORKS)
-   ============================================================ */
+
 .how-head {
   margin-bottom: 3rem;
 }
@@ -406,9 +381,7 @@
   text-align: center;
 }
 
-/* ============================================================
-   CONTATO & LOCALIZAÇÕES (CONTACT)
-   ============================================================ */
+
 .contact-inner {
   text-align: center;
 }
@@ -475,9 +448,7 @@
   gap: 1rem;
 }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
+
 .footer-top {
   display: grid;
   gap: 2.5rem;
@@ -555,9 +526,7 @@
   color: var(--muted-foreground);
 }
 
-/* ============================================================
-   PÁGINA DE AGENDAMENTO (BOOKING PAGE)
-   ============================================================ */
+
 .booking-main {
   padding-top: 7rem;
   padding-bottom: 8rem;
@@ -578,9 +547,7 @@
   color: var(--muted-foreground);
 }
 
-/* Mobile-first: 2 colunas no celular (4 itens ficavam
-   espremidos em telas de 320-360px), 4 colunas a partir
-   de 480px — ver responsive.css */
+
 .steps-bar {
   margin-bottom: 2.5rem;
   display: grid;
@@ -614,18 +581,12 @@
   display: none;
 }
 
-/* Sem isso o JS mostrava step-short E step-full ao mesmo tempo
-   (o "SERVIÇO SERVIÇO" duplicado) — o step-full já tinha regra
-   de esconder, faltava o par pro step-short. */
+
 .steps-bar .step-short {
   display: inline;
 }
 
-/* ---------- Visibilidade dos passos ----------
-   O JS (booking.js) alterna a classe "active" em cada
-   .booking-step conforme bookingState.step. Sem isso, os 4
-   passos (Serviço, Dados, Pagamento, Confirmação) apareciam
-   todos ao mesmo tempo, empilhados. */
+
 .booking-step {
   display: none;
 }
@@ -634,9 +595,7 @@
   display: block;
 }
 
-/* ============================================================
-   PASSO 1 — SELEÇÃO DE SERVIÇO
-   ============================================================ */
+
 .service-select-grid {
   display: grid;
   gap: 1rem;
@@ -731,9 +690,7 @@
   color: var(--muted-foreground);
 }
 
-/* ============================================================
-   PASSO 2 — DADOS (FORMULÁRIO)
-   ============================================================ */
+
 .form-grid {
   display: grid;
   gap: 1rem;
@@ -786,7 +743,7 @@
 .form-actions {
   margin-top: 1.5rem;
   display: flex;
-  flex-direction: column-reverse; /* botão principal fica em cima no mobile */
+  flex-direction: column-reverse; 
   gap: 1rem;
 }
 
@@ -794,9 +751,7 @@
   width: 100%;
 }
 
-/* ============================================================
-   PASSO 3 — PAGAMENTO (PIX)
-   ============================================================ */
+
 .payment-grid {
   display: grid;
   gap: 2rem;
@@ -899,9 +854,7 @@
   color: var(--muted-foreground);
 }
 
-/* ============================================================
-   PASSO 4 — CONFIRMAÇÃO
-   ============================================================ */
+
 .confirmation-box {
   padding: 2rem 0;
   text-align: center;
@@ -965,9 +918,7 @@
   color: var(--muted-foreground);
 }
 
-/* ============================================================
-   PÁGINA 404
-   ============================================================ */
+
 .notfound {
   min-height: 100vh;
   display: flex;
@@ -997,9 +948,7 @@
   color: hsl(210 90% 75%);
 }
 
-/* ============================================================
-   LETREIRO CORRIDO (MARQUEE)
-   ============================================================ */
+
 .marquee-track {
   width: 100%;
   max-width: 100vw;
@@ -1056,5 +1005,4 @@
   }
 }
 
-/* Todo comportamento responsivo (media queries) deste arquivo
-   foi movido para assets/css/responsive.css */
+

@@ -1,19 +1,14 @@
-/**
- * Geração de payload PIX "BR Code" (padrão EMV QRCPS do Banco Central),
- * 100% client-side — funciona em hospedagem estática.
- *
- * Porta direta de src/lib/pix.ts. Precisa ser carregado depois de config.js.
- */
+
 
 var PixUtils = (function () {
-  /** Campo EMV: ID + tamanho + valor */
+  
   function emv(id, value) {
     value = String(value);
     var len = String(value.length).padStart(2, "0");
     return id + len + value;
   }
 
-  /** CRC16-CCITT */
+  
   function crc16(payload) {
     var crc = 0xffff;
 
@@ -32,7 +27,7 @@ var PixUtils = (function () {
     return crc.toString(16).toUpperCase().padStart(4, "0");
   }
 
-  /** Normaliza nome/cidade */
+  
   function normalizeMerchantText(value, max) {
     return String(value)
       .normalize("NFD")
@@ -43,7 +38,7 @@ var PixUtils = (function () {
       .slice(0, max);
   }
 
-  /** Gera o PIX Copia e Cola */
+  
   function buildPixPayload(opts) {
     var merchant = normalizeMerchantText(opts.merchantName, 25);
 
@@ -51,19 +46,12 @@ var PixUtils = (function () {
 
     var cleanKey = String(opts.key).replace(/\D/g, "");
 
-    /*
-     * PIX Merchant Account Information
-     *
-     * 00 = GUI
-     * 01 = chave PIX
-     */
+    
     var merchantAccount = emv("00", "BR.GOV.BCB.PIX") + emv("01", cleanKey);
 
     merchantAccount = emv("26", merchantAccount);
 
-    /*
-     * Montagem do BR Code
-     */
+    
     var base =
       emv("00", "01") +
       merchantAccount +
@@ -76,21 +64,18 @@ var PixUtils = (function () {
       emv("62", emv("05", String(opts.txid).slice(0, 25))) +
       emv("63", "0000");
 
-    /*
-     * CRC deve ser calculado incluindo:
-     * 6304 + 0000
-     */
+    
     var crc = crc16(base);
 
     return base.slice(0, -4) + crc;
   }
 
-  /** Sinal de 50% */
+  
   function calcSignal(total) {
     return Math.round(Number(total) * 50) / 100;
   }
 
-  /** Formata dinheiro */
+  
   function formatBRL(value) {
     return new Intl.NumberFormat("pt-BR", {
       style: "currency",
@@ -98,7 +83,7 @@ var PixUtils = (function () {
     }).format(value);
   }
 
-  /** Gera TXID */
+  
   function buildTxid(prefix) {
     var ts = Date.now().toString(36).toUpperCase();
     var rand = Math.random().toString(36).slice(2, 8).toUpperCase();

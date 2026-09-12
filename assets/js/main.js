@@ -1,8 +1,4 @@
-/**
- * Lógica da página inicial (index.html): navbar, menu mobile,
- * rolagem suave até as seções, animação "reveal" ao rolar,
- * e renderização dos cards de serviço a partir de config.js.
- */
+
 
 document.addEventListener("DOMContentLoaded", function () {
   setupNavbar();
@@ -14,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   scrollToSectionFromHash();
 });
 
-/* ---------- Navbar / menu mobile ---------- */
+
 function setupNavbar() {
   var toggle = document.querySelector("[data-nav-toggle]");
   var menu = document.querySelector("[data-mobile-menu]");
@@ -42,14 +38,14 @@ function setupNavbar() {
           if (toggle) toggle.innerHTML = iconMenu();
         }
       } else {
-        // Em outra página, navega para a home com o alvo na URL (#id)
+        
         link.setAttribute("href", "index.html#" + id);
       }
     });
   });
 }
 
-/** Se a página abriu com um #hash (vindo de outra página), rola até lá */
+
 function scrollToSectionFromHash() {
   if (document.body.dataset.page !== "index") return;
   var hash = window.location.hash.replace("#", "");
@@ -60,7 +56,7 @@ function scrollToSectionFromHash() {
   }, 80);
 }
 
-/* ---------- Animação ao rolar (.reveal) ---------- */
+
 function setupReveal() {
   var items = document.querySelectorAll(".reveal");
   if (!("IntersectionObserver" in window) || items.length === 0) {
@@ -87,7 +83,7 @@ function setupReveal() {
   });
 }
 
-/* ---------- Animação da foto (selfie) ao rolar ---------- */
+
 function setupSelfieReveal() {
   var items = document.querySelectorAll(".selfie-reveal");
   if (!("IntersectionObserver" in window) || items.length === 0) {
@@ -114,7 +110,7 @@ function setupSelfieReveal() {
   });
 }
 
-/* ---------- Cards de serviço ---------- */
+
 function renderServices() {
   var grid = document.querySelector("[data-services-grid]");
   if (!grid) return;
@@ -175,7 +171,7 @@ function renderServices() {
   setupReveal();
 }
 
-/* ---------- Locais do estúdio ---------- */
+
 function setupLocations() {
   var containers = document.querySelectorAll("[data-locations]");
 
@@ -208,7 +204,7 @@ function setupLocations() {
   });
 }
 
-/* ---------- Links do WhatsApp / Instagram / endereço via config ---------- */
+
 function setupWhatsappLinks() {
   document.querySelectorAll("[data-whatsapp-link]").forEach(function (el) {
     el.setAttribute("href", "https://wa.me/" + siteConfig.whatsappNumber);
@@ -233,7 +229,7 @@ function setupWhatsappLinks() {
   });
 }
 
-/* ---------- Ícones inline (substituem o lucide-react) ---------- */
+
 function iconMenu() {
   return '<svg class="icon" viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>';
 }
