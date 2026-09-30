@@ -1,6 +1,6 @@
 # Tattoo Ink
 
-Site institucional e de agendamento para um estúdio de tatuagem, desenvolvido em HTML, CSS e JavaScript puro.
+Site institucional e de agendamento para um estúdio de tatuagem, desenvolvido em HTML, CSS e JavaScript puro. Desenvolvido apenas para a captação de sinais de agendamentos via PIX - Whatsapp.
 
 ## Objetivo
 
